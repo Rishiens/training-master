@@ -1,7 +1,6 @@
 package secondPhase.RPG;
 
 //import java.util.Arrays;
-import secondPhase.RPG.Player;
 
 import java.util.Scanner;
 
@@ -15,13 +14,10 @@ public class miniRPG {
          boolean smrt = false;
          boolean prezitie = false;
          int tahy = 0;
-        int hpHrac = 100;
-        int utokHrac = 5;
-        int utokNepriatel = 15;
-        int hpNepriatel = 100;
         double sancaNaUtek = 0.20;
         String[] schopnosti = {"silný útok","healing", "útek"};
-        int [] hodnoty = {15, 15, 20};
+        int [] hodnoty = {15, 30, 20};
+
          Scanner scanner = new Scanner(System.in);
 
 
@@ -65,7 +61,8 @@ public class miniRPG {
              int menu = scanner.nextInt();
 
              switch (menu) {
-                 case 1:hraZacala = true;
+                 case 1:
+                     hraZacala = true;
                      System.out.println("Tak ideme na to");
                      break;
                  case 2:
@@ -80,96 +77,105 @@ public class miniRPG {
                      spustenie = false;
                      break;
              }
+             Player player = new Player(120, 15);
+
              System.out.println("si v lese");
              System.out.println("prepadol ta goblin");
-             while (spustenie && !prezitie && !smrt) {
-                 if (hpNepriatel <= 0) {prezitie = true;}
-
-                 Player.hp = Player.hp - utokNepriatel;
-                 if (Player.hp <= 0) {smrt = true;}
+             Enemy enemy = null;enemy = Enemy.gremlin();
+             while (spustenie && hraZacala && !prezitie && !smrt) {
 
 
 
-                 System.out.println("máš - " + Player.hp + " HP");
-                 System.out.println("Goblin má" + hpNepriatel +" HP");
+                 player.hp = player.hp - enemy.damage;
+
+
+                 System.out.println("máš - " + player.hp + " HP");
+                 System.out.println("Goblin má" + enemy.hp + " HP");
                  //vzbrat nejakz dalsi utok pre klasickz combat
-                if (tahy != 3) {
+                 if (tahy != 3) {
 
-                    System.out.println("Si na rade");
-                    System.out.println("1 - Klasicky utok");
-                    System.out.println("2 - Pokus o útek");
+                     System.out.println("Si na rade");
+                     System.out.println("1 - Klasicky utok");
+                     System.out.println("2 - Pokus o útek");
 
-                    int volba = scanner.nextInt();
-                    switch (volba) {
-                        case 1: hpNepriatel = hpNepriatel - Player.hp ;
-                            System.out.println("útocis klasickym utokom na nepriatela za 5 DMG");
-                            System.out.print(" ");
-                            break;
-                        case 2:
-                            if (Math.random() < sancaNaUtek) {
-                            System.out.println("Podarilo sa ti uniect ty zbabelec ale prežil si.");
-                            System.out.print(" ");
+                     int volba = scanner.nextInt();
+                     switch (volba) {
+                         case 1:
+                             enemy.hp = enemy.hp - player.damage;
+                             System.out.println("útocis klasickym utokom na nepriatela za + " + player.damage + " DMG");
+                             System.out.print(" ");
+                             break;
+                         case 2:
+                             if (Math.random() < sancaNaUtek) {
+                                 System.out.println("Podarilo sa ti uniect ty zbabelec ale prežil si.");
+                                 System.out.print(" ");
 
-                            hraZacala = false;
-                            break;
-                        }
-                        default:
-                            System.out.println("Vymyslel si si útok ktorý nezabral, smola");
-                            System.out.print(" ");
+                                 hraZacala = false;
+                                 break;
+                             }
+                         default:
+                             System.out.println("Vymyslel si si útok ktorý nezabral, smola");
+                             System.out.print(" ");
 
-                    }
-                }
+                     }
+                 }
 
 
                  //kazde 3 tahy vypise specialny utok
 
                  if (tahy % 3 == 0) {
-                     System.out.println("máš " + Player.hp + " HP");
-                     System.out.println("Goblin má" + hpNepriatel +" HP");
+                     System.out.println("máš " + player.hp + " HP");
+                     System.out.println("Goblin má" + enemy.hp + " HP");
                      System.out.println("Si na rade");
                      System.out.println("🎉 Máš špeciálny útok na výber!");
 
                      // tu môžeš zobraziť nové útoky
 
                      for (int i = 0; i < hodnoty.length; i++) {
-                         System.out.println((i + 1) + "-" + schopnosti[i] + "(" + hodnoty[i] + ")");}
-                         int volba = scanner.nextInt();
-                         switch (volba) {
-                             case 1:
-                                 System.out.println("Silno si uderil za " + hodnoty[0] + " DMG");
-                                 hpNepriatel = hpNepriatel - utokHrac;
-                                 break;
-                             case 2:
-                                 System.out.println("heal");
-                                 Player.hp = Player.hp + hodnoty[1];
-                                 System.out.println("Uzdravil si sa za " + hodnoty[1] + " HP");
-                                 break;
-                             case 3:
-                                 System.out.println("Snažíš sa utiecť");
-                                 if (Math.random() < sancaNaUtek) {
+                         System.out.println((i + 1) + "-" + schopnosti[i] + "(" + hodnoty[i] + ")");
+                     }
+                     int volba = scanner.nextInt();
+                     switch (volba) {
+                         case 1:
+                             System.out.println("Silno si uderil za " + hodnoty[0] + " DMG");
+                             enemy.hp = enemy.hp - player.damage;
+
+                             break;
+                         case 2:
+                             System.out.println("heal");
+                             player.hp = player.hp + hodnoty[1];
+                             System.out.println("Uzdravil si sa za " + hodnoty[1] + " HP");
+                             break;
+                         case 3:
+                             System.out.println("Snažíš sa utiecť");
+                             if (Math.random() < sancaNaUtek) {
                                  System.out.println("Podarilo sa ti uniect ty zbabelec ale prežil si.");
                                  System.out.print(" ");
 
-                                 hraZacala = false;}
-                                 break;
-                             default:
-                                 System.out.println("tvoj vymysel goblina nepobavil a jednu ti tresol");
-                                 break;
+                                 hraZacala = false;
+                             }
+                             break;
+                         default:
+                             System.out.println("tvoj vymysel goblina nepobavil a jednu ti tresol");
+                             break;
                      }
-
 
 
                  }
 
 
+             }
+             tahy++;
+             if (player.hp <= 0) {
+                 smrt = true;
+             }
+
+             if (enemy.hp <= 0) {
+                 prezitie = true;
+             }
 
 
-
-
-                 } tahy++;
-
-
-             }scanner.close();
+         }scanner.close();
          }
          //si v hre a musis si vybrat utok z array
 

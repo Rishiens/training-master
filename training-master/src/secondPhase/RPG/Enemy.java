@@ -1,24 +1,23 @@
 package secondPhase.RPG;
 
 public class Enemy {
-    static int hp ;
-    static int damage;
+    String name;
+     int hp ;
+     int damage;
 
-    Enemy (int hp, int damage) {
+    Enemy (String name , int hp, int damage) {
+        this.name= name;
         this.hp = hp;
         this.damage = damage;
     }
 
-    static Enemy gremlyn(){
-        hp = 200;
-        damage = 20 ;
-        return null;
+    static Enemy gremlin(){
+        return new Enemy ("Gremlyn" , 200 , 20);
+
     }
 
-    static Enemy troll() {
-        hp = 300;
-        damage = 28;
-        return null;
+     static Enemy troll() {
+         return new Enemy ("Troll" , 300 , 28);
     }
 
 }
