@@ -2,8 +2,8 @@ package secondPhase.RPG;
 
 public class Player {
 
-     int hp=120 ;
-     int damage =15;
+     int hp = 220 ;
+     int damage = 30;
 
     Player (int hp, int damage) {
         this.hp = hp;
