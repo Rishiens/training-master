@@ -82,11 +82,15 @@ public class miniRPG {
              System.out.println("si v lese");
              System.out.println("prepadol ta goblin");
              Enemy enemy = null;enemy = Enemy.gremlin();
+
              while (spustenie && hraZacala && !prezitie && !smrt) {
+                 if (player.hp <= 0) {
+                     smrt = true;
+                 }
 
-
-
-                 player.hp = player.hp - enemy.damage;
+                 if (enemy.hp <= 0) {
+                     prezitie = true;
+                 }
 
 
                  System.out.println("máš - " + player.hp + " HP");
@@ -138,7 +142,6 @@ public class miniRPG {
                      switch (volba) {
                          case 1:
                              System.out.println("Silno si uderil za " + hodnoty[0] + " DMG");
-                             enemy.hp = enemy.hp - player.damage;
 
                              break;
                          case 2:
@@ -162,22 +165,22 @@ public class miniRPG {
 
 
                  }
+                 if (player.hp <= 0) {
+                     smrt = true;
+                 }
 
+                 if (enemy.hp <= 0) {
+                     prezitie = true;
+                 }
+                 player.hp = player.hp - enemy.damage;
+                 tahy++;
 
              }
-             tahy++;
-             if (player.hp <= 0) {
-                 smrt = true;
-             }
 
-             if (enemy.hp <= 0) {
-                 prezitie = true;
-             }
 
 
          }scanner.close();
          }
-         //si v hre a musis si vybrat utok z array
 
 
     }
