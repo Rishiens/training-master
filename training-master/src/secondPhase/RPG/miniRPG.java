@@ -75,7 +75,7 @@ public class miniRPG {
             System.out.println("prepadol ta " + Enemy.name);}
 
         while (vitazstvo <= 5 && !prezitie) {
-            Enemy enemy = null;
+            Enemy enemy;
 
             switch (vitazstvo) {
                 case 0:
