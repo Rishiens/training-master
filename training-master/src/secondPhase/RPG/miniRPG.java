@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class miniRPG {
 
      static void main(String[] args) {
-
+//toto je testik zmeny
          boolean spustenie = true;
          boolean zaProlog = false;
          boolean hraZacala = false;
