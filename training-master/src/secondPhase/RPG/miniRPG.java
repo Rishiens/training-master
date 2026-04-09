@@ -184,14 +184,12 @@ public class miniRPG {
                  break;}
                  tahy++;
 
-
                  }
                  if (smrt) {
                      System.out.println("Umrel si v bolestiach. " + Enemy.name + " znásilnil a zožral tvoju mrtvolu.");
                  }
              }
 }
-
              if (vitazstvo >=5) {
                  System.out.println("dokazal si to");
              }scanner.close();
