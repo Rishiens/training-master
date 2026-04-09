@@ -1,13 +1,10 @@
 package secondPhase.RPG;
-
-//import java.util.Arrays;
-
 import java.util.Scanner;
 
 public class miniRPG {
 
      static void main(String[] args) {
-//toto je testik zmeny
+
          boolean spustenie = true;
          boolean zaProlog = false;
          boolean hraZacala = false;
@@ -20,8 +17,6 @@ public class miniRPG {
         int [] hodnoty = {45, 60, 20};
 
          Scanner scanner = new Scanner(System.in);
-
-         // tu pojdu uvodne texty
 
          while (spustenie && !zaProlog){
              System.out.println("1 - Začíname");
@@ -91,9 +86,11 @@ public class miniRPG {
                     break;
                 case 3:
                      enemy = Enemy.hunter();
+                    player.hp= 350;
                     break;
                 case 4:
                      enemy = Enemy.king();
+                    player.hp= 350;
                 break;
                 default: enemy = null;
                 break;
@@ -187,6 +184,7 @@ public class miniRPG {
                  }
                  if (smrt) {
                      System.out.println("Umrel si v bolestiach. " + Enemy.name + " znásilnil a zožral tvoju mrtvolu.");
+                     break;
                  }
              }
 }
