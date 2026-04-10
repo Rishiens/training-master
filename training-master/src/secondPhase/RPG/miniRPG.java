@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class miniRPG {
 
-     static void main(String[] args) {
+    static void main(String[] args) {
 
          boolean spustenie = true;
          boolean zaProlog = false;
@@ -19,14 +19,18 @@ public class miniRPG {
          Scanner scanner = new Scanner(System.in);
 
          while (spustenie && !zaProlog){
+             System.out.println();
              System.out.println("1 - Začíname");
              System.out.println("2 - Ukončiť");
+             System.out.println();
+
 
              int prolog = scanner.nextInt();
          switch (prolog) {
              case 1:
                  zaProlog = true;
                  System.out.println("Tak ideme na to ty hrdina");
+                 System.out.println();
                  break;
              case 2:
                  System.out.println("Zbohom slabko");
@@ -34,17 +38,19 @@ public class miniRPG {
                  break;
              default:
                  System.out.println("nehraj sa na testera");
+                 System.out.println();
                  break;
 
          }
          }
          //menu hry
          while (spustenie && !hraZacala) {
-
+             System.out.println();
              System.out.println("====Mini rpg=====");
              System.out.println("1 - Spustiť hru");
              System.out.println("2 - pravidlá");
              System.out.println("0 - vypnúť hru");
+             System.out.println();
 
              int menu = scanner.nextInt();
 
@@ -54,63 +60,77 @@ public class miniRPG {
                      System.out.println("Tak ideme na to");
                      break;
                  case 2:
+                     System.out.println();
+                     System.out.println("****************************************************");
                      System.out.println("Si hrdina v lese a objaví sa nepriateľ");
                      System.out.println("Základ je ho zabiť alebo újsť");
                      System.out.println("Každé 3 ťahy máš na výber špeciálny útok");
                      System.out.println("vyberaj ich s rozvahou, lebo nepriateľ je silný");
                      System.out.println("Good luck hrdina");
+                     System.out.println("****************************************************");
+                     System.out.println();
                      break;
                  case 0:
                      System.out.println("Tak možno nabudúce");
                      spustenie = false;
                      break;
              }
-             Player player = new Player(220, 35);
-            if (hraZacala) {System.out.println("si v lese");
-            System.out.println("prepadol ta " + Enemy.name);}
+         } Enemy enemy = null;
+         Player player = new Player();
 
         while (vitazstvo <= 5 && !prezitie) {
-            Enemy enemy;
 
             switch (vitazstvo) {
                 case 0:
-                     enemy = Enemy.gremlin();
+                     enemy = new Gremlin();
+                    System.out.println("prepadol ta " + enemy.name);
                     break;
                 case 1:
-                    enemy = Enemy.troll();
-                    player.hp= 250;
+                    enemy = new Troll();
+                    System.out.println("prepadol ta " + enemy.name);
+                    player.hp = player.hp + 50;
                     break;
                 case 2:
-                    enemy = Enemy.knight();
-                    player.hp= 300;
+                    enemy = new Knight();
+                    System.out.println("prepadol ta " + enemy.name);
+                    player.hp = player.hp + 60;
                     break;
                 case 3:
-                     enemy = Enemy.hunter();
-                    player.hp= 350;
+                     enemy = new Hunter();
+                    System.out.println("prepadol ta " + enemy.name);
+                    player.hp = player.hp + 70;
                     break;
                 case 4:
-                     enemy = Enemy.king();
-                    player.hp= 350;
-                break;
-                default: enemy = null;
-                break;
+                     enemy = new King();
+                    System.out.println("prepadol ta " + enemy.name);
+                    player.hp = player.hp + 80;
+                    break;
+                default:
+                    System.out.println("Dokončil si svoju pomstu");
+                    break;
             }
 
              while (spustenie && hraZacala && !smrt) {
-
+                 System.out.println();
                  System.out.println("máš " + player.hp + " HP");
                  System.out.println(Enemy.name + " má " + enemy.hp + " HP");
+                 System.out.println();
 
                  //vzbrat nejakz dalsi utok pre klasickz combat
                  if (tahy > 0 && tahy % 3 == 0) {
+                     System.out.println();
                      System.out.println("máš " + player.hp + " HP");
-                     System.out.println("Goblin má " + enemy.hp + " HP");
+                     System.out.println(enemy.name + " " + enemy.hp + " HP");
                      System.out.println("🎉 Máš špeciálny útok na výber!");
+                     System.out.println();
+
 
                      // tu môžeš zobraziť nové útoky
 
                      for (int i = 0; i < hodnoty.length; i++) {
                          System.out.println((i + 1) + "-" + schopnosti[i] + "(" + hodnoty[i] + ")");
+                         System.out.println();
+
                      }
                      int volba = scanner.nextInt();
                      switch (volba) {
@@ -128,8 +148,7 @@ public class miniRPG {
                              System.out.println("Snažíš sa utiecť");
                              if (Math.random() < sancaNaUtek) {
                                  System.out.println("Podarilo sa ti uniect ty zbabelec ale prežil si.");
-                                 System.out.print(" ");
-
+                                 System.out.println();
                                  hraZacala = false;
                                  break;
                              }
@@ -152,14 +171,13 @@ public class miniRPG {
                      switch (volba) {
                          case 1:
                              enemy.hp = enemy.hp - player.damage;
-                             System.out.println("útocis klasickym utokom na nepriatela za + " + player.damage + " DMG");
+                             System.out.println("útocis klasickym utokom na nepriatela za " + player.damage + " DMG");
                              System.out.print(" ");
                              break;
                          case 2:
                              if (Math.random() < sancaNaUtek) {
                                  System.out.println("Podarilo sa ti uniect ty zbabelec ale prežil si.");
                                  System.out.print(" ");
-
                                  hraZacala = false;
                                  break;
                              }
@@ -172,6 +190,7 @@ public class miniRPG {
                  if (enemy.hp <= 0) {
                      System.out.println("Podarilo sa ti prezit, no pokracujes dalej");
                      vitazstvo++;
+                     tahy = 0;
                      break;}
 
                  player.hp = player.hp - enemy.damage;
@@ -186,14 +205,15 @@ public class miniRPG {
                      System.out.println("Umrel si v bolestiach. " + Enemy.name + " znásilnil a zožral tvoju mrtvolu.");
                      break;
                  }
+                 if (vitazstvo >=5) {
+                System.out.println("dokazal si to");
              }
 }
-             if (vitazstvo >=5) {
-                 System.out.println("dokazal si to");
-             }scanner.close();
+         scanner.close();
+             }
              }
 
-         }
+
 
 
 
