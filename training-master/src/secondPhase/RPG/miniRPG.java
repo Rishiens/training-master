@@ -1,4 +1,5 @@
 package secondPhase.RPG;
+import java.util.Random;
 import java.util.Scanner;
 
 public class miniRPG {
@@ -191,6 +192,20 @@ public class miniRPG {
                      System.out.println("Podarilo sa ti prezit, no pokracujes dalej");
                      vitazstvo++;
                      tahy = 0;
+
+                     LootManager manager = new LootManager();
+                     Random random = new Random();
+                     int index = random.nextInt(manager.loot.size());
+                     Items droppedItem = manager.loot.get(index);
+                     System.out.println("Našiel si " + droppedItem.getName());
+
+                    //dokoncit itemy
+                     if (droppedItem.getOneTimeUse()){
+                         System.out.println("Tento item je na jedno použitie");
+                     }
+                     else {
+                         System.out.println("Tento predmet ti ostane do smrti");
+                     }
                      break;}
 
                  player.hp = player.hp - enemy.damage;
