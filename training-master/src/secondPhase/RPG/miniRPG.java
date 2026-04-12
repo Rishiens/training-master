@@ -114,7 +114,7 @@ public class miniRPG {
              while (spustenie && hraZacala && !smrt) {
                  System.out.println();
                  System.out.println("máš " + player.hp + " HP");
-                 System.out.println(Enemy.name + " má " + enemy.hp + " HP");
+                 System.out.println(enemy.name + " má " + enemy.hp + " HP");
                  System.out.println();
 
                  //vzbrat nejakz dalsi utok pre klasickz combat
@@ -217,7 +217,7 @@ public class miniRPG {
 
                  }
                  if (smrt) {
-                     System.out.println("Umrel si v bolestiach. " + Enemy.name + " znásilnil a zožral tvoju mrtvolu.");
+                     System.out.println("Umrel si v bolestiach. " + enemy.name + " znásilnil a zožral tvoju mrtvolu.");
                      break;
                  }
                  if (vitazstvo >=5) {

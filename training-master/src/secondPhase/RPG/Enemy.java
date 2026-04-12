@@ -1,7 +1,7 @@
 package secondPhase.RPG;
 
 public class Enemy {
-    static String name;
+     String name;
      int hp ;
      int damage;
 
