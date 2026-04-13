@@ -78,7 +78,7 @@ public class miniRPG {
              }
          } Enemy enemy = null;
          Player player = new Player();
-
+        Inventory inventory = new Inventory();
         while (vitazstvo <= 5 && !prezitie) {
 
             switch (vitazstvo) {
@@ -131,8 +131,8 @@ public class miniRPG {
                      for (int i = 0; i < hodnoty.length; i++) {
                          System.out.println((i + 1) + "-" + schopnosti[i] + "(" + hodnoty[i] + ")");
                          System.out.println();
-
                      }
+                     System.out.println("4 - použiť item");
                      int volba = scanner.nextInt();
                      switch (volba) {
                          case 1:
@@ -153,6 +153,12 @@ public class miniRPG {
                                  hraZacala = false;
                                  break;
                              }
+                         case 4:
+                             //tu pojde vyber predmetu
+                                 //int index = scanner.nextInt(inventory.loot.size());
+                               //  Items itemsForUse = inventory.loot.get(inventory.loot.size() - 1);
+                                 //System.out.println("máš na výber " + itemsForUse.getName());
+
                          default:
                              System.out.println("tvoj vymysel goblina nepobavil a jednu ti tresol");
                              break;
@@ -167,6 +173,7 @@ public class miniRPG {
                      System.out.println("Si na rade");
                      System.out.println("1 - Klasicky utok");
                      System.out.println("2 - Pokus o útek");
+                     System.out.println("3 - Piužiť item");
 
                      int volba = scanner.nextInt();
                      switch (volba) {
@@ -182,6 +189,24 @@ public class miniRPG {
                                  hraZacala = false;
                                  break;
                              }
+                             case 3:
+
+
+                                 for (int k = 1; k < inventory.loot.size() ; k++ ){
+                                     Items item = inventory.loot.get(k);
+                                     System.out.println((k + 1) + " - " + item.getName());
+                                 }
+                                 System.out.println("Vyber si item ");
+                                 System.out.println();
+                                        int index = scanner.nextInt();
+                                        if (index > 0 && index <= inventory.loot.size()){
+                                            Items selected = inventory.loot.get(index);
+                                            System.out.println("použil si " + selected.getName());
+                                        }
+                                        else {
+                                            System.out.println("Zlá voľba");
+                                        }
+                                 break;
                          default:
                              System.out.println("Vymyslel si si útok ktorý nezabral, smola");
                              System.out.print(" ");
@@ -199,6 +224,7 @@ public class miniRPG {
                      Items droppedItem = manager.loot.get(index);
                      System.out.println("Našiel si " + droppedItem.getName());
 
+                     inventory.addItem(droppedItem);
                     //dokoncit itemy
                      if (droppedItem.getOneTimeUse()){
                          System.out.println("Tento item je na jedno použitie");
