@@ -173,7 +173,7 @@ public class miniRPG {
                      System.out.println("Si na rade");
                      System.out.println("1 - Klasicky utok");
                      System.out.println("2 - Pokus o útek");
-                     System.out.println("3 - Piužiť item");
+                     System.out.println("3 - Pužiť item");
 
                      int volba = scanner.nextInt();
                      switch (volba) {
@@ -191,11 +191,13 @@ public class miniRPG {
                              }
                              case 3:
 
-
-                                 for (int k = 1; k < inventory.loot.size() ; k++ ){
+                                // vzpise itemy aj tie ktore su na dlhodobe pouzitie
+                                 //urobit podmienku nech sa zobrazuju na pouzitie itemy
+                                 for (int k = 0; k < inventory.loot.size() ; k++ ){
                                      Items item = inventory.loot.get(k);
                                      System.out.println((k + 1) + " - " + item.getName());
                                  }
+
                                  System.out.println("Vyber si item ");
                                  System.out.println();
                                         int index = scanner.nextInt();
