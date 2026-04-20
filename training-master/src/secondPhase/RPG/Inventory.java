@@ -7,4 +7,5 @@ public class Inventory {
     public void addItem(Items item) {
         loot.add(item);
     }
+
 }

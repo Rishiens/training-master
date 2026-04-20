@@ -1,10 +1,11 @@
 package secondPhase.RPG;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class miniRPG {
 
-    static void main(String[] args) {
+     static void main(String[] args) {
 
          boolean spustenie = true;
          boolean zaProlog = false;
@@ -80,6 +81,7 @@ public class miniRPG {
          Player player = new Player();
         Inventory inventory = new Inventory();
         while (vitazstvo <= 5 && !prezitie) {
+
 
             switch (vitazstvo) {
                 case 0:
@@ -188,8 +190,8 @@ public class miniRPG {
                                  System.out.println("Podarilo sa ti uniect ty zbabelec ale prežil si.");
                                  System.out.print(" ");
                                  hraZacala = false;
-                                 break;
-                             }
+                                break;
+                             }break;
                              case 3:
                                  boolean hasUsableItem = false;
 
@@ -205,19 +207,24 @@ public class miniRPG {
                                      System.out.println("Nemáš žiadny predmet");
                                  }
                                  else {
-                                         for (int k = 0; k < inventory.loot.size() ; k++ ){
-                                             Items item = inventory.loot.get(k);
-                                             if (item.oneTimeUse ){
-                                             System.out.println((k + 1) + " - " + item.getName());}
-                                         }
+                                     ArrayList<Items> usableItems = new ArrayList<>();
 
+                                         for (Items item : inventory.loot) {
+                                         if (item.oneTimeUse) {
+                                             usableItems.add(item);
+                                         }
+                                         }
+                                     for (int i = 0; i < usableItems.size(); i++) {
+                                         System.out.println((i + 1) + " - " + usableItems.get(i).getName());
+                                     }
                                          System.out.println("Vyber si item ");
                                          System.out.println();
                                          int index = scanner.nextInt();
-                                         if (index > 0 && index <= inventory.loot.size()){
-                                             Items selected = inventory.loot.get(index);
+                                         if (index > 0 && index <= usableItems.size()){
+                                             Items selected = usableItems.get(index - 1);
+                                             selected.use(player);
                                              System.out.println("použil si " + selected.getName());
-
+                                            inventory.loot.remove(selected);
                                          }
                                          else {
                                              System.out.println("Zlá voľba");

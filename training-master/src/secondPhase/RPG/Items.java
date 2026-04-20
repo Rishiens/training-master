@@ -6,11 +6,16 @@ public class Items {
     int heal;
     boolean oneTimeUse;
 
+    // v Items
+    public void use(Player player) {
+        System.out.println("Použil si item, ale nič sa nestalo...");
+    }
     Items(String name, int damage, int heal, boolean oneTimeUse) {
         this.name = name;
         this.damage = damage;
         this.heal = heal;
         this.oneTimeUse = oneTimeUse;
+
     }
     public String getName() {
         return name;
@@ -23,6 +28,7 @@ public class Items {
     }
     public boolean getOneTimeUse() {
         return oneTimeUse;
+
     }
     public static Items Sword = new Items ("Sword", 10, 0, false);
     public static Items Zweihander = new Items ("Zweihander", 15, 0,false);
