@@ -31,8 +31,8 @@ public class Items {
 
     }
     public static Items Sword = new Items ("Sword", 10, 0, false);
-    public static Items Zweihander = new Items ("Zweihander", 15, 0,false);
-    public static Items MagicWand = new Items ("MagicWand", 20, 0,false);
+    public static Items Zweihander = new Items ("Zweihander", 20, 0,false);
+    public static Items MagicWand = new Items ("MagicWand", 30, 0,false);
     public static Items Granate = new Items ("Granate", 100, 0, true);
     public static Items HealthPotion = new Items ("HealthPotion", 0, 150, true);
 

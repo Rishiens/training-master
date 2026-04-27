@@ -17,7 +17,7 @@ public class miniRPG {
         double sancaNaUtek = 0.20;
         String[] schopnosti = {"silný útok","healing", "útek"};
         int [] hodnoty = {45, 60, 20};
-
+         LootManager manager = new LootManager();
          Scanner scanner = new Scanner(System.in);
 
          while (spustenie && !zaProlog){
@@ -77,7 +77,8 @@ public class miniRPG {
                      spustenie = false;
                      break;
              }
-         } Enemy enemy = null;
+
+     }Enemy enemy = null;
          Player player = new Player();
         Inventory inventory = new Inventory();
         while (vitazstvo <= 5 && !prezitie) {
@@ -161,6 +162,7 @@ public class miniRPG {
                                  //int index = scanner.nextInt(inventory.loot.size());
                                 Items itemsForUse = inventory.loot.get(inventory.loot.size() - 1);
                                 System.out.println("máš na výber " + itemsForUse.getName());
+                                break;
 
                          default:
                              System.out.println("tvoj vymysel goblina nepobavil a jednu ti tresol");
@@ -189,9 +191,9 @@ public class miniRPG {
                              if (Math.random() < sancaNaUtek) {
                                  System.out.println("Podarilo sa ti uniect ty zbabelec ale prežil si.");
                                  System.out.print(" ");
-                                 hraZacala = false;
-                                break;
-                             }break;
+                                 hraZacala = false;}
+
+                             break;
                              case 3:
                                  boolean hasUsableItem = false;
 
@@ -209,27 +211,28 @@ public class miniRPG {
                                  else {
                                      ArrayList<Items> usableItems = new ArrayList<>();
 
-                                         for (Items item : inventory.loot) {
+                                     for (Items item : inventory.loot) {
                                          if (item.oneTimeUse) {
                                              usableItems.add(item);
                                          }
-                                         }
+                                     }
                                      for (int i = 0; i < usableItems.size(); i++) {
                                          System.out.println((i + 1) + " - " + usableItems.get(i).getName());
                                      }
-                                         System.out.println("Vyber si item ");
-                                         System.out.println();
-                                         int index = scanner.nextInt();
-                                         if (index > 0 && index <= usableItems.size()){
-                                             Items selected = usableItems.get(index - 1);
-                                             selected.use(player);
-                                             System.out.println("použil si " + selected.getName());
-                                            inventory.loot.remove(selected);
-                                         }
-                                         else {
-                                             System.out.println("Zlá voľba");
-                                         }}break;
+                                     System.out.println("Vyber si item ");
+                                     System.out.println();
+                                     int index = scanner.nextInt();
+                                     if (index > 0 && index <= usableItems.size()) {
+                                         Items selected = usableItems.get(index - 1);
+                                         selected.use(player);
+                                         System.out.println("použil si " + selected.getName());
+                                         enemy.hp = enemy.hp - selected.damage;
+                                         inventory.loot.remove(selected);
+                                     } else {
+                                         System.out.println("Zlá voľba");
+                                     }
 
+                                 }
 
                          default:
                              System.out.println("Vymyslel si si útok ktorý nezabral, smola");
@@ -242,21 +245,28 @@ public class miniRPG {
                      vitazstvo++;
                      tahy = 0;
 
-                     LootManager manager = new LootManager();
-                     Random random = new Random();
+
+                 Random random = new Random();
                      int index = random.nextInt(manager.loot.size());
                      Items droppedItem = manager.loot.get(index);
-                     System.out.println("Našiel si " + droppedItem.getName());
 
+                     System.out.println("Našiel si " + droppedItem.getName());
                      inventory.addItem(droppedItem);
+                     if (!droppedItem.oneTimeUse){
+                         manager.loot.remove(index);
+                     }
+
+
+
                     //dokoncit itemy
                      if (droppedItem.getOneTimeUse()){
                          System.out.println("Tento item je na jedno použitie");
                      }
                      else {
                          System.out.println("Tento predmet ti ostane do smrti");
+                         player.damage =  player.damage + droppedItem.damage;
                      }
-                     break;}
+                    break; }
 
                  player.hp = player.hp - enemy.damage;
                  System.out.println("nepriatel ti dal za "+ enemy.damage + " DMG");
@@ -265,18 +275,18 @@ public class miniRPG {
                  break;}
                  tahy++;
 
-                 }
+
                  if (smrt) {
-                     System.out.println("Umrel si v bolestiach. " + enemy.name + " znásilnil a zožral tvoju mrtvolu.");
-                     break;
-                 }
+                     System.out.println("Umrel si v bolestiach a " + enemy.name + " znásilnil a zožral tvoju mrtvolu.");
+                     break;}
+
                  if (vitazstvo >=5) {
-                System.out.println("dokazal si to");
+                System.out.println("dokazal si to");}}
+
+}scanner.close(); }
+
              }
-}
-         scanner.close();
-             }
-             }
+
 
 
 
