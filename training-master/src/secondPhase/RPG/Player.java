@@ -21,4 +21,8 @@ public class Player {
             hp = maxHp;
         }
         System.out.println("Aktuálne HP: " + hp);
-}}
+}
+    void attack(Enemy enemy){
+        enemy.hp -= this.damage;
+    }
+}

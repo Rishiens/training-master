@@ -15,5 +15,9 @@ package secondPhase.RPG;
             player.heal(healAmount);
             System.out.println("Vyliečil si sa o " + healAmount + " HP");
         }
+
+
+
+
     }
 

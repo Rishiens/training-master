@@ -183,7 +183,7 @@ public class miniRPG {
                      int volba = scanner.nextInt();
                      switch (volba) {
                          case 1:
-                             enemy.hp = enemy.hp - player.damage;
+                            player.attack(enemy);
                              System.out.println("útocis klasickym utokom na nepriatela za " + player.damage + " DMG");
                              System.out.print(" ");
                              break;
@@ -268,7 +268,7 @@ public class miniRPG {
                      }
                     break; }
 
-                 player.hp = player.hp - enemy.damage;
+                 enemy.attack(player);
                  System.out.println("nepriatel ti dal za "+ enemy.damage + " DMG");
                  if (player.hp <= 0) {
                      smrt = true;
